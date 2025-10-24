@@ -1,0 +1,297 @@
+// Combined SCSS for Login and Register pages
+// Modern neutral/minimalist design
+
+// Color variables
+$primary-color: #2d3748;
+$secondary-color: #4a5568;
+$accent-color: #5a67d8;
+$error-color: #e53e3e;
+$border-color: #e2e8f0;
+$input-bg: #f7fafc;
+$text-primary: #1a202c;
+$text-secondary: #718096;
+$white: #ffffff;
+$shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+
+// Transitions
+$transition: all 0.3s ease;
+
+// Shared styles for both Login and Register
+.login-container,
+.register-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e9ecef 100%);
+    padding: 2rem 1rem;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.login-card,
+.register-card {
+    background: $white;
+    border-radius: 16px;
+    box-shadow: $shadow-lg;
+    padding: 3rem;
+    width: 100%;
+    max-width: 480px;
+    animation: slideUp 0.4s ease-out;
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (max-width: 640px) {
+        padding: 2rem 1.5rem;
+    }
+}
+
+.login-header,
+.register-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+
+    h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: $text-primary;
+        margin: 0 0 0.5rem 0;
+        letter-spacing: -0.025em;
+    }
+
+    p {
+        font-size: 0.95rem;
+        color: $text-secondary;
+        margin: 0;
+    }
+}
+
+.login-form,
+.register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    label {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: $text-primary;
+        margin-bottom: 0.25rem;
+    }
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .input-icon {
+        position: absolute;
+        left: 1rem;
+        color: $text-secondary;
+        pointer-events: none;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 0.875rem 1rem 0.875rem 3rem;
+        font-size: 0.95rem;
+        color: $text-primary;
+        background-color: $input-bg;
+        border: 2px solid $border-color;
+        border-radius: 10px;
+        transition: $transition;
+        outline: none;
+
+        &::placeholder {
+            color: #a0aec0;
+        }
+
+        &:focus {
+            border-color: $accent-color;
+            background-color: $white;
+            box-shadow: 0 0 0 3px rgba(90, 103, 213, 0.1);
+        }
+
+        &.error {
+            border-color: $error-color;
+            background-color: #fff5f5;
+
+            &:focus {
+                box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+            }
+        }
+    }
+
+    select {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23718096' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 1rem center;
+        cursor: pointer;
+    }
+
+    .toggle-password {
+        position: absolute;
+        right: 1rem;
+        background: none;
+        border: none;
+        color: $text-secondary;
+        cursor: pointer;
+        padding: 0.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: $transition;
+
+        &:hover {
+            color: $accent-color;
+        }
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+.error-message {
+    font-size: 0.8rem;
+    color: $error-color;
+    margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.form-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: -0.5rem;
+
+    .checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        color: $text-primary;
+        cursor: pointer;
+
+        input[type='checkbox'] {
+            width: 1rem;
+            height: 1rem;
+            cursor: pointer;
+            accent-color: $accent-color;
+        }
+
+        span {
+            user-select: none;
+        }
+    }
+
+    .forgot-link {
+        font-size: 0.875rem;
+        color: $accent-color;
+        text-decoration: none;
+        font-weight: 500;
+        transition: $transition;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 0.875rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: $white;
+    background: linear-gradient(135deg, $accent-color 0%, #4c51bf 100%);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: $transition;
+    margin-top: 0.5rem;
+
+    &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 15px rgba(90, 103, 213, 0.3);
+    }
+
+    &:active:not(:disabled) {
+        transform: translateY(0);
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+}
+
+.login-footer,
+.register-footer {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid $border-color;
+
+    p {
+        font-size: 0.9rem;
+        color: $text-secondary;
+        margin: 0;
+
+        a {
+            color: $accent-color;
+            text-decoration: none;
+            font-weight: 600;
+            transition: $transition;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+// Responsive adjustments
+@media (max-width: 640px) {
+
+    .login-card,
+    .register-card {
+        box-shadow: none;
+        border-radius: 0;
+    }
+
+    .login-header,
+    .register-header {
+        h1 {
+            font-size: 1.75rem;
+        }
+    }
+
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+}
