@@ -1,0 +1,482 @@
+// Variables
+$primary-color: #3174ad;
+$danger-color: #dc3545;
+$warning-color: #fd7e14;
+$success-color: #28a745;
+$secondary-color: #6c757d;
+$light-gray: #f8f9fa;
+$border-color: #dee2e6;
+$text-dark: #212529;
+$text-muted: #6c757d;
+
+// Calendar Container
+.calendar-container {
+    background: white;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1400px;
+    margin: 0 auto;
+
+    .calendar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 24px;
+        flex-wrap: wrap;
+        gap: 16px;
+
+        h2 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+            color: $text-dark;
+        }
+
+        .calendar-legend {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+
+            .legend-item {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                font-size: 14px;
+                color: $text-muted;
+
+                .legend-dot {
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+
+                    &.appointment {
+                        background-color: $primary-color;
+                    }
+
+                    &.court-date {
+                        background-color: $danger-color;
+                    }
+
+                    &.deadline {
+                        background-color: $warning-color;
+                    }
+
+                    &.task {
+                        background-color: $success-color;
+                    }
+                }
+            }
+        }
+    }
+
+    // React Big Calendar Customization
+    .rbc-calendar {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+            'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+            sans-serif;
+
+        .rbc-toolbar {
+            padding: 16px 0;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+
+            .rbc-toolbar-label {
+                font-size: 20px;
+                font-weight: 600;
+                color: $text-dark;
+                text-transform: capitalize;
+            }
+
+            button {
+                padding: 8px 16px;
+                border: 1px solid $border-color;
+                background: white;
+                color: $text-dark;
+                border-radius: 4px;
+                font-size: 14px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    background: $light-gray;
+                    border-color: $primary-color;
+                }
+
+                &.rbc-active {
+                    background: $primary-color;
+                    color: white;
+                    border-color: $primary-color;
+
+                    &:hover {
+                        background: darken($primary-color, 10%);
+                    }
+                }
+            }
+        }
+
+        .rbc-month-view,
+        .rbc-time-view {
+            border: 1px solid $border-color;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .rbc-header {
+            padding: 12px 4px;
+            font-weight: 600;
+            font-size: 14px;
+            color: $text-dark;
+            background: $light-gray;
+            border-bottom: 1px solid $border-color;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .rbc-month-row {
+            border-top: 1px solid $border-color;
+            min-height: 80px;
+        }
+
+        .rbc-day-bg {
+            border-left: 1px solid $border-color;
+
+            &.rbc-today {
+                background-color: rgba($primary-color, 0.05);
+            }
+
+            &.rbc-off-range-bg {
+                background-color: #fafafa;
+            }
+        }
+
+        .rbc-date-cell {
+            padding: 8px;
+            text-align: right;
+
+            &.rbc-now {
+                font-weight: bold;
+
+                a {
+                    background: $primary-color;
+                    color: white;
+                    padding: 4px 8px;
+                    border-radius: 50%;
+                }
+            }
+        }
+
+        .rbc-event {
+            padding: 4px 8px;
+            font-size: 13px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+
+            &:hover {
+                opacity: 1 !important;
+                transform: translateY(-1px);
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            }
+
+            &.rbc-selected {
+                background-color: darken($primary-color, 15%) !important;
+            }
+        }
+
+        .rbc-event-label {
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .rbc-event-content {
+            font-size: 13px;
+        }
+
+        .rbc-time-slot {
+            min-height: 40px;
+        }
+
+        .rbc-current-time-indicator {
+            background-color: $danger-color;
+            height: 2px;
+        }
+    }
+}
+
+// Modal Styles
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 700px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    border-bottom: 1px solid $border-color;
+
+    h3 {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 600;
+        color: $text-dark;
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        font-size: 28px;
+        color: $text-muted;
+        cursor: pointer;
+        padding: 0;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 4px;
+        transition: all 0.2s ease;
+
+        &:hover {
+            background: $light-gray;
+            color: $text-dark;
+        }
+    }
+}
+
+// Form Styles
+.appointment-form {
+    padding: 24px;
+
+    .form-group {
+        margin-bottom: 20px;
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            color: $text-dark;
+
+            .required {
+                color: $danger-color;
+                margin-left: 4px;
+            }
+        }
+
+        input[type='text'],
+        input[type='datetime-local'],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid $border-color;
+            border-radius: 6px;
+            font-size: 14px;
+            font-family: inherit;
+            transition: all 0.2s ease;
+
+            &:focus {
+                outline: none;
+                border-color: $primary-color;
+                box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+            }
+
+            &.error {
+                border-color: $danger-color;
+
+                &:focus {
+                    box-shadow: 0 0 0 3px rgba($danger-color, 0.1);
+                }
+            }
+
+            &::placeholder {
+                color: #adb5bd;
+            }
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        select {
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23495057' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            padding-right: 36px;
+            appearance: none;
+        }
+
+        .error-message {
+            display: block;
+            margin-top: 6px;
+            font-size: 13px;
+            color: $danger-color;
+        }
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+
+        @media (max-width: 768px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 24px;
+        border-top: 1px solid $border-color;
+        margin-top: 24px;
+
+        .form-actions-right {
+            display: flex;
+            gap: 12px;
+        }
+    }
+
+    .btn {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: inherit;
+
+        &.btn-primary {
+            background-color: $primary-color;
+            color: white;
+
+            &:hover {
+                background-color: darken($primary-color, 10%);
+                transform: translateY(-1px);
+                box-shadow: 0 4px 12px rgba($primary-color, 0.3);
+            }
+        }
+
+        &.btn-secondary {
+            background-color: white;
+            color: $text-dark;
+            border: 1px solid $border-color;
+
+            &:hover {
+                background-color: $light-gray;
+            }
+        }
+
+        &.btn-danger {
+            background-color: $danger-color;
+            color: white;
+
+            &:hover {
+                background-color: darken($danger-color, 10%);
+            }
+        }
+    }
+}
+
+// Responsive Design
+@media (max-width: 768px) {
+    .calendar-container {
+        padding: 16px;
+
+        .calendar-header {
+            flex-direction: column;
+            align-items: flex-start;
+
+            .calendar-legend {
+                width: 100%;
+            }
+        }
+
+        .rbc-calendar {
+            .rbc-toolbar {
+                flex-direction: column;
+
+                .rbc-btn-group {
+                    width: 100%;
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+        }
+    }
+
+    .modal-content {
+        max-width: 100%;
+        border-radius: 0;
+        max-height: 100vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .calendar-container {
+        .calendar-header {
+            h2 {
+                font-size: 22px;
+            }
+
+            .calendar-legend {
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+    }
+}
